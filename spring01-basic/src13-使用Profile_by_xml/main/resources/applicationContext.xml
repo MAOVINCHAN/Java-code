@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 配置dev环境的bean -->
+    <beans profile="dev">
+        <bean class="com.learn.demo.DataSource" id="ds">
+            <property name="driverClassName" value="com.mysql.jc.jdbc.Driver"/>
+            <property name="url" value="jdbc:mysql://localhost/dev"/>
+            <property name="username" value="root"/>
+            <property name="password" value="123456"/>
+        </bean>
+    </beans>
+
+    <!-- 配置pro环境的bean -->
+    <beans profile="pro">
+        <bean class="com.learn.demo.DataSource" id="ds">
+            <property name="driverClassName" value="com.mysql.jc.jdbc.Driver"/>
+            <property name="url" value="jdbc:mysql://localhost/prod"/>
+            <property name="username" value="dla"/>
+            <property name="password" value="fasldakdaj"/>
+        </bean>
+    </beans>
+</beans>

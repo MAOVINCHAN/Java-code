@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.learn</groupId>
+    <artifactId>maven01</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!--
+            Tomcat 版本	    Servlet API 规范	    所需依赖
+            Tomcat 10.1.x	Servlet 6.0	        jakarta.servlet-api:6.0.0
+            Tomcat 10.0.x	Servlet 5.0	        jakarta.servlet-api:5.0.0
+            Tomcat 9.x	    Servlet 4.0	        javax.servlet-api:4.0.1
+            Tomcat 8.x	    Servlet 3.1	        javax.servlet-api:3.1.0
+         -->
+        <!-- https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+            <!-- provided: 写代码时需要，运行时由jdk或某个服务器提供 -->
+            <scope>provided</scope>
+            <!-- runtime: 写代码时不需要，运行时需要，如 mysql-connector-java -->
+            <!-- <scope>runtime</scope> -->
+            <!-- compile: 始终需要 -->
+            <!-- <scope>compile</scope> -->
+            <!-- test: 测试时需要，项目打包时不会打包测试的代码 -->
+            <!-- <scope>test</scope> -->
+        </dependency>
+    </dependencies>
+</project>

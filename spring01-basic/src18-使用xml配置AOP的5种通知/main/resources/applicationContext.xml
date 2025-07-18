@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean class="com.learn.demo.CalculatorImpl" id="calculator" />
+    <bean class="com.learn.demo.MyAspects" id="myAspects"/>
+
+    <aop:config>
+        <aop:aspect ref="myAspects">
+            <aop:pointcut id="p1" expression="execution(* com.learn.demo.CalculatorImpl.*(..))"/>
+
+            <aop:before method="my_before" pointcut-ref="p1"/>
+            <aop:after method="my_after" pointcut-ref="p1" />
+            <aop:around method="my_around" pointcut-ref="p1" />
+            <!-- 返回值通知需要指定my_after_returning的参数哪个是返回值 -->
+            <aop:after-returning method="my_after_returning" pointcut-ref="p1" returning="result" />
+            <!-- 异常通知需要指定my_after_throwing的参数哪个是捕获的异常 -->
+            <aop:after-throwing method="my_after_throwing" pointcut-ref="p1" throwing="e" />
+        </aop:aspect>
+    </aop:config>
+</beans>

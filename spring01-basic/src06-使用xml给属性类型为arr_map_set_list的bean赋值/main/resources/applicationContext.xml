@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="com.learn.demo.byJava.model.Hobby" id="basketball">
+        <property name="name" value="打篮球" />
+        <property name="des" value="和朋友相约打篮球"/>
+    </bean>
+
+    <bean class="com.learn.demo.byJava.model.User" id="Tom">
+        <property name="name" value="Tom"/>
+        <property name="age" value="18"/>
+        <property name="cats">
+            <array>
+                <bean class="com.learn.demo.byJava.model.Cat" id="cat1">
+                    <property name="age" value="1"/>
+                    <property name="name" value="可乐"/>
+                </bean>
+                <bean class="com.learn.demo.byJava.model.Cat" id="cat2">
+                    <constructor-arg name="age" value="1"/>
+                    <constructor-arg name="name" value="雪碧"/>
+                </bean>
+            </array>
+        </property>
+        <property name="cars">
+            <list>
+                <bean class="com.learn.demo.byJava.model.Car">
+                    <property name="band" value="奔驰"/>
+                    <property name="cate" value="小汽车"/>
+                    <property name="price" value="300000"/>
+                </bean>
+                <bean class="com.learn.demo.byJava.model.Car">
+                    <constructor-arg name="band" value="春风"/>
+                    <constructor-arg name="cate" value="摩托车"/>
+                    <constructor-arg name="price" value="50000"/>
+                </bean>
+            </list>
+        </property>
+        <property name="hobby">
+            <map>
+                <entry key="球类" value-ref="basketball"></entry>
+            </map>
+        </property>
+        <property name="weChart">
+            <set>
+                <!-- value用来描述字符串和数字 -->
+                <value>weChart1</value>
+                <value>weChart2</value>
+                <value>weChart3</value>
+            </set>
+        </property>
+    </bean>
+</beans>

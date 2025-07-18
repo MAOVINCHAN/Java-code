@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--
+    scope:
+    prototype: 表示多列模式
+    singleton: 表示单例模式
+    web环境下还有三个取值：
+    request：表示每个请求创建一个bean
+    session：表示每个绘画创建一个bean
+    application：表示每个应用创建一个bean
+
+    通过init-method指定该bean的初始化方法
+    通过destroy-method指定该bean的销毁方法
+
+    scope singleton由spring容器销毁
+    scope prototype由jvm销毁
+    -->
+    <bean class="com.learn.demo.User" id="user" scope="prototype" init-method="init" destroy-method="destroy" />
+</beans>

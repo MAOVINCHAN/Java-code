@@ -1,0 +1,2 @@
+Student{id=1, name=tom, age=18, score=100.0}
+Student{id=2, name=jerry, age=19, score=100.0}

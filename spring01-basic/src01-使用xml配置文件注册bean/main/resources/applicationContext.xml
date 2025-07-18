@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--
+        向spring容器注册一个bean，使用反射机制，默认调用的是无参构造
+        class代码类的完整包路径
+        id代表类的名字
+     -->
+    <!--  1. 调用无参构造注册一个bean  -->
+    <bean id="user1" class="com.learn.demo.byJava.model.User"></bean>
+
+    <!--  2. 调用有参构造注册一个bean  -->
+    <bean class="com.learn.demo.byJava.model.User" id="user2">
+        <constructor-arg name="id" value="1" />
+        <constructor-arg name="username" value="Tom" />
+        <constructor-arg name="address" value="beijing" />
+    </bean>
+
+    <!--  3. 通过setter注册一个bean (先调用无参构造创造一个对象，再通过setter设置属性)  -->
+    <!--  a. 适用于基本数据类型  -->
+    <bean class="com.learn.demo.byJava.model.User" id="user3">
+        <property name="id" value="2" />
+        <property name="username" value="Jerry" />
+        <property name="address" value="shanghai" />
+    </bean>
+
+    <!--  b. 适用于复杂数据类型的注入  -->
+
+    <!--  4. 通过p命名空间注册一个bean (实际也是先调用无参构造创造一个对象，再通过setter设置属性)  -->
+    <bean class="com.learn.demo.byJava.model.User" id="user4" p:username="Blob" p:address="shenzhen" />
+
+</beans>

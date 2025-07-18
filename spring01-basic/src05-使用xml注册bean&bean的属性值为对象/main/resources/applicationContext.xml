@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean class="com.learn.demo.byJava.model.Author" id="author">
+        <property name="name" value="罗贯中" />
+        <property name="age" value="70" />
+    </bean>
+
+    <bean class="com.learn.demo.byJava.model.Book" id="book-sgyy">
+        <property name="name" value="三国演义" />
+        <property name="price" value="45" />
+        <!-- 属性值非基本类型时，可以通过ref引用一个bean来赋值 -->
+        <property name="author" ref="author" />
+    </bean>
+
+    <bean class="com.learn.demo.byJava.model.Book" id="book-hlm">
+        <property name="name" value="红楼梦" />
+        <property name="price" value="49" />
+        <!-- 属性值非基本类型时，可以通过嵌套一个bean来赋值 -->
+        <property name="author">
+            <bean class="com.learn.demo.byJava.model.Author">
+                <property name="name" value="曹雪芹" />
+                <property name="age"   value="75" />
+            </bean>
+        </property>
+    </bean>
+
+    <bean class="com.learn.demo.byJava.model.Book" id="book-xyj">
+        <constructor-arg name="name" value="西游记" />
+        <constructor-arg name="price" value="60" />
+        <constructor-arg name="author">
+            <bean class="com.learn.demo.byJava.model.Author">
+                <property name="name" value="吴承恩" />
+                <property name="age" value="55" />
+            </bean>
+        </constructor-arg>
+    </bean>
+</beans>

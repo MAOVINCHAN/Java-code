@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>users</title>
+    <script src="../js/jquery.min.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+    const toThead = () => {
+        const strs = ["地址", "年龄", "ID", "密码", "电话", "成绩", "用户名"]
+        let str = "<thead>";
+        str += "<tr>";
+        for (let i = 0; i < strs.length; i++) {
+            const name = strs[i];
+            str += "<td>";
+            str += name;
+            str += "</td>";
+        }
+        str += "</tr>";
+        str += "</thead>"
+        return str;
+    }
+    const rowToRow = (row) => {
+        var keys = Object.keys(row);
+        let str = "<tr>"
+        for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
+            str += "<td>";
+            str += row[key];
+            str += "</td>";
+        }
+        str += "</tr>"
+        return str;
+    }
+
+    console.log($)
+    $.ajax("/servlet1/test", {
+        method: "GET",
+        success: (data) => {
+            const thead = toThead();
+            let tbody = "<tbody>";
+            if(data.length) {
+                for (let i = 0; i < data.length; i++) {
+                    const row = data[i];
+                    const rowEl = rowToRow(row);
+                    tbody += rowEl
+                }
+            }
+            tbody += "</tbody>"
+            let table = "<table>";
+                table += thead;
+                table += tbody;
+            table += "</table>"
+            const body = document.querySelector("body");
+            console.log(table, table);
+            body.innerHTML = table;
+        },
+        error: () => {
+            console.log("error")
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean class="com.learn.demo.CalculatorImpl" id="calculator" />
+    <bean class="com.learn.demo.BeforeAdvice" id="beforeAdvice" />
+
+    <aop:config>
+        <!--
+            execution(
+                * 第一个参数为方法的返回值类型，*代表任意返回值类型，int || void表示int或void类型
+                com.learn.demo.ICalculator.* 第二个参数left表示包/类/方法的具体路径
+                (..) 第二个参数right表示方法的参数，..表示任意参数个数，任意参数类型
+            )
+            
+            当拦截的类是由接口实现，则execution内的类需要指定该类实现的接口，<bean>注册为该接口的具体实现；(切点为接口，bean为接口实现)
+            当拦截的类未由接口实现，则execution内的类指定该类即可，<bean>注册为该类即可。(切点为该类，bean也是该类)
+        -->
+        <aop:pointcut id="p1" expression="execution(* com.learn.demo.ICalculator.*(..))"/>
+        <aop:advisor advice-ref="beforeAdvice" pointcut-ref="p1" />
+    </aop:config>
+</beans>

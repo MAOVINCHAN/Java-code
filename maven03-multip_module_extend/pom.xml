@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.learn</groupId>
+    <artifactId>multip_module_extend</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <!--
+        <packaging>pom</packaging>表示这是一个聚合工程
+        聚合工程并不会被打成jar或war包，只是把子模块打包为jar或war包
+    -->
+    <packaging>pom</packaging>
+    <modules>
+        <module>model</module>
+        <module>dao</module>
+        <module>service</module>
+        <module>web</module>
+    </modules>
+
+    <!--
+        这里可以声明一个变量，标签名即为变量名，标签值即为变量值
+    -->
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!-- 这里的依赖会被子模块继承 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.18.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!--
+        这里可以声明子模块需要用到的依赖，方便管理子模块的依赖及版本号
+        这里声明，不会直接加入到项目中，需要在子模块中引用
+        引用时指定groupId和artifactId即可，不需要指定version
+    -->
+    <dependencyManagement>
+        <dependencies></dependencies>
+    </dependencyManagement>
+</project>
