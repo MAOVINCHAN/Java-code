@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--
+        1.注册控制器到springmvc容器中
+        id以'/'开头时，使用BeanNameUrlHandlerMapping
+        其他时候可以使用SimpleUrlHandlerMapping一一对应
+    -->
+    <!--<bean class="com.learn.demo.HelloController" id="/hello" />-->
+    <bean class="com.learn.demo.HelloController" id="helloController" />
+
+    <!--
+        2. 配置处理器映射HandlerMapping
+        作用：根据浏览器的url地址，找到对应的处理器（控制器）
+        例如：http://localhost:8080/mvc/hello -> 找到HelloController
+
+        - 配置为beanNameUrlHandlerMapping时，上方注册的bean的id需要以'/'开头
+        - 配置为SimpleUrlHandlerMapping时，mappings中所有的控制器对应的地址都需要配置一遍
+    -->
+    <!--<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" id="beanNameUrlHandlerMapping" />-->
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/hello">helloController</prop><!-- 表示地址为/hello时，映射到helloController -->
+            </props>
+        </property>
+    </bean>
+
+    <!--
+        3. 配置处理器适配器HandlerAdapter
+        作用：执行上一步找到的处理器，但是处理器有多种不同定义方式，执行方式也不同，通过适配器可以使用通过一种方式调用
+        当控制器实现 HttpRequestHandler 接口，使用 HttpRequestHandlerAdapter 适配器
+        当控制器实现 Controller 接口，使用 SimpleControllerHandlerAdapter 适配器
+        当控制器实现 HttpServlet 接口，使用 SimpleServletHandlerAdapter 适配器
+        注解：RequestMappingHandlerAdapter
+    -->
+    <!--<bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter" />-->
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+
+    <!--
+        4. 配置内部资源视图解析器
+        作用：找到Controller中返回的ModelAndView配置的视图并解析
+    -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/" /> <!-- 这里配置前缀，也就是视图文件所在的文件夹 -->
+        <property name="suffix" value=".jsp" /> <!-- 这里配置后缀，也就是视图文件的文件类型 -->
+    </bean>
+</beans>

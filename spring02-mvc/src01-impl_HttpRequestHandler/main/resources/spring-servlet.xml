@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--1.注册控制器到springmvc容器中-->
+    <bean class="com.learn.demo.HelloController" id="/hello" />
+
+    <!--
+        2. 配置处理器映射HandlerMapping
+        作用：根据浏览器的url地址，找到对应的处理器（控制器）
+        例如：http://localhost:8080/mvc/hello -> 找到HelloController
+    -->
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" id="beanNameUrlHandlerMapping" />
+
+    <!--
+        3. 配置处理器适配器HandlerAdapter
+        作用：执行上一步找到的处理器，但是处理器有多种不同定义方式，执行方式也不同，通过适配器可以使用通过一种方式调用
+        当控制器实现 HttpRequestHandler 接口，使用 HttpRequestHandlerAdapter 适配器
+        当控制器实现 Controller 接口，使用 SimpleControllerHandlerAdapter 适配器
+        当控制器实现 HttpServlet 接口，使用 SimpleServletHandlerAdapter 适配器
+        注解：RequestMappingHandlerAdapter
+    -->
+    <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter" id="adapter" />
+</beans>

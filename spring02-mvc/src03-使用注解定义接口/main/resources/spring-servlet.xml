@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!-- 使用了@Controller标记类，需要使用包扫描将组件注册到springmvc -->
+    <context:component-scan base-package="com.learn.demo.controller" />
+
+    <!-- 使用了@RequestMapping注解的接口，使用RequestMappingHandlerMapping处理器映射器来查找 -->
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />-->
+
+    <!-- 使用了@RequestMapping注解的接口，使用RequestMappingHandlerAdapter适配器来执行 -->
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" />-->
+
+    <!--
+        因为以后固定使用@RequestMapping所以RequestMappingHandlerMapping 和 RequestMappingHandlerAdapter也是固定的
+        可以使用<mvc:annotation-driven />代替
+        <mvc:annotation-driven />即做了对 RequestMappingHandlerMapping 和 RequestMappingHandlerAdapter的替换，也做了功能的增量，比如对json的支持
+    -->
+    <mvc:annotation-driven />
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+</beans>
